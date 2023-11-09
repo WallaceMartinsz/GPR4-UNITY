@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ContainerController : MonoBehaviour
 {
     [Header("Config")]
     [SerializeField] Transform item;
-   
+
 
     public bool HaveItem()
     {
@@ -26,6 +24,6 @@ public class ContainerController : MonoBehaviour
         this.item = _item;
     }
 
-    
-  
+
+
 }

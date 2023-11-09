@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,7 +13,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Config")]
     [SerializeField] Color highlightColor;
-    
+
     // New tag for objects to be highlighted
     [SerializeField] string ContainerTag = "Container";
 
@@ -163,7 +162,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void onTriggerEnter2D (BoxCollider2D col)
+    void onTriggerEnter2D(BoxCollider2D col)
     {
         Application.LoadLevel("vocevenceu");
     }

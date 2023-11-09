@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/VoceVenceu.unity
     guid: c501efd0d569212feba312c692852bb9
+  - enabled: 1
+    path: Assets/Scenes/VocePerdeu.unity
+    guid: 467b25bb4bce6374b91275a953f56e5a
   m_configObjects: {}
