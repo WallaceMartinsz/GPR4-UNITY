@@ -1,46 +1,54 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GuardaSeguir : MonoBehaviour
 {
-    public float speed;
-    private Transform target;
-    private Rigidbody2D rb;
+    public float velocidade;
+    public Transform player;
+    public float distanciaParaSeguir;
     private Animator anim;
+    private Rigidbody2D rb;
 
     void Start()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null)
-        {
-            target = player.transform;
-        }
-        rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
-        if (target != null)
+        if (player != null)
         {
-            Vector2.Distance(transform.position, target.position);
+            float distancia = Vector2.Distance(transform.position, player.position);
 
-            transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
-            if (transform.position.x > target.position.x)
+            if (distancia < distanciaParaSeguir)
             {
-                transform.eulerAngles = new Vector3(0f, 0f, 0f);
+                Vector2 direcao = (player.position - transform.position).normalized;
+                Debug.Log(direcao);
+                rb.velocity = new Vector2(velocidade * direcao.x, rb.velocity.y);
+
+                if (transform.position.x > player.position.x)
+                {
+                    transform.eulerAngles = new Vector3(0f, 0f, 0f);
+                }
+                else
+                {
+                    transform.eulerAngles = new Vector3(0f, 180f, 0f);
+                }
+                anim.SetBool("isWalk", true);
             }
             else
             {
-                transform.eulerAngles = new Vector3(0f, 180f, 0f);
+                anim.SetBool("isWalk", false);
+                rb.velocity = Vector2.zero;
             }
-            anim.SetBool("isWalk", true);
         }
         else
         {
             anim.SetBool("isWalk", false);
         }
-
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
